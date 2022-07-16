@@ -9,16 +9,28 @@ public class Util {
     static String userName = "root";
     static String password = "nikneim";
     static String connectionURL = "jdbc:mysql://localhost:3306/test";
-  public static Connection getConnection(){
-      Connection connection = null;
-      try {
-          Class.forName("com.mysql.cj.jdbc.Driver");
-          connection = DriverManager.getConnection(connectionURL,userName,password);
+    static Connection connection = null;
 
-      } catch (ClassNotFoundException | SQLException e) {
-          throw new RuntimeException(e);
+    public static Connection getConnection() {
 
-      }
-      return connection;
-  }
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(connectionURL, userName, password);
+
+        } catch (ClassNotFoundException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return connection;
+    }
+    public static void closeConnection(){
+        try {
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
 }
