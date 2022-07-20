@@ -27,7 +27,7 @@ public class Main {
 
         userDao.dropUsersTable();
 
-        Util.getSessionFactory().close();
+        Util.closeFactory();
 
 
    /*     userService.createUsersTable();

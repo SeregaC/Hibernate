@@ -4,6 +4,7 @@ package jm.task.core.jdbc.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -59,6 +60,15 @@ public class Util {
             }
         }
         return sessionFactory;
+    }
+    public static void closeFactory(){
+        if(sessionFactory != null ){
+            try {
+                sessionFactory.close();
+            } catch (HibernateException e){
+                e.printStackTrace();
+            }
+        }
     }
     }
 
